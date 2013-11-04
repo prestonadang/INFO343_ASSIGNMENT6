@@ -1,0 +1,276 @@
+<!doctype.html>
+<html>
+	
+	<head>
+		<title>jQuery Features</title>
+		 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css" />
+  <style>
+      #drag, #drag2 {background-color: #f0f0f0; width: 100px; height: 100px; padding: 0.5em; float: left; margin: 50px 10px 10px 0;}
+      #drop {width: 200px; height: 200px; padding: 0.5em; float: left; margin: 50px;}
+      .border {border: 1px solid #000;}
+      .toggler { width: 500px; height: 200px; position: relative; }
+      #button { padding: .5em 1em; text-decoration: none; }
+      #effect { width: 240px; height: 135px; padding: 0.4em; position: relative; }
+      #effect h3 { margin: 0; padding: 0.4em; text-align: center; }
+      .ui-effects-transfer { border: 2px dotted gray; }
+
+      .toggler2 { width: 500px; height: 200px; }
+  	  #button2 { padding: .5em 1em; text-decoration: none; }
+  	  #effect2 { width: 240px; height: 135px; padding: 0.4em; position: relative; }
+  	  #effect2 h3 { margin: 0; padding: 0.4em; text-align: center; }
+      
+  </style>
+
+  <script>
+  $(function() {
+    
+
+    $("#password").keyup(function() {
+  	  var length = $(this).val().length;
+  	  console.log(length);
+
+  	  var total = null;
+  	  total = length * 8;
+
+  	  barUpdate(total);
+    });
+
+    function barUpdate(total) {
+      $("#progressbar").progressbar({
+        value: total
+      });
+    }
+
+  });
+
+  
+
+  $(function() {
+      $("#drag").draggable({containment: "document"},{revert:"valid"});
+      $("#drag2").draggable({containment: "document"},{revert:"invalid"});
+      $("#drop").droppable({
+        activeClass: "ui-state-hover",
+        hoverClass: "ui-state-active",
+        drop: function(event, ui) {
+          $(this)
+            .addClass("ui-state-highlight")
+            .find("p")
+              .html("Dropped!");
+        }
+      });
+    });
+
+  $(function(){
+        $('#one').liteAccordion({
+                containerWidth:400,
+                autoPlay : true,
+                pauseOnHover : true,
+                theme : 'dark',
+                rounded : true,
+                enumerateSlides : true                    
+            });
+    });
+
+  $(function() {
+    // run the currently selected effect
+    function runHide() {
+      // get effect type from
+      var selectedEffect = $( "#effectTypes" ).val();
+ 
+      // most effect types need no options passed by default
+      var options = {};
+      // some effects have required parameters
+      if ( selectedEffect === "scale" ) {
+        options = { percent: 0 };
+      } else if ( selectedEffect === "transfer" ) {
+        options = { to: "#button", className: "ui-effects-transfer" };
+      } else if ( selectedEffect === "size" ) {
+        options = { to: { width: 200, height: 60 } };
+      }
+ 
+      // run the effect
+      $( "#effect" ).effect( selectedEffect, options, 500, callback );
+    };
+ 
+    // callback function to bring a hidden box back
+    function callback() {
+      setTimeout(function() {
+        $( "#effect" ).removeAttr( "style" ).hide().fadeIn();
+      }, 1000 );
+    };
+ 
+    // set effect from select menu value
+    $( "#button" ).click(function() {
+      runHide();
+      return false;
+    });
+  });
+
+$(function() {
+    // run the currently selected effect
+    function runEffect() {
+      // get effect type from
+      var selectedEffect = $( "#effectTypes" ).val();
+ 
+      // most effect types need no options passed by default
+      var options = {};
+      // some effects have required parameters
+      if ( selectedEffect === "scale" ) {
+        options = { percent: 100 };
+      } else if ( selectedEffect === "size" ) {
+        options = { to: { width: 280, height: 185 } };
+      }
+ 
+      // run the effect
+      $( "#effect2" ).show( selectedEffect, options, 500, callback );
+    };
+ 
+    //callback function to bring a hidden box back
+    function callback() {
+      setTimeout(function() {
+        $( "#effect2:visible" ).removeAttr( "style" ).fadeOut();
+      }, 1000 );
+    };
+ 
+    // set effect from select menu value
+    $( "#button2" ).click(function() {
+      runEffect();
+      return false;
+    });
+ 
+    $( "#effect2" ).hide();
+  });
+  </script>
+</head>
+<body>
+Password Strength: <input type = "text" id = "password"/><br></br>
+<div id="progressbar" style="width: 500px; margin-bottom: 50px;"></div>
+
+
+ <script src="http://nicolahibbert.com/demo/liteAccordion/js/liteaccordion.jquery.js"></script>
+    
+      <link href="http://nicolahibbert.com/demo/liteAccordion/css/liteaccordion.css" rel="stylesheet" />
+    <div class="accordion" id="one" style= "margin-bottom: 50px;">
+        <ol>
+            <li>
+            <h2 class="ui-state-default"><span>Slide One</span></h2>
+            <div>
+                <div>
+                    <img alt="image" src="fb1.jpg"/>
+                 </div>
+            </div>
+            </li>
+            <li>
+            <h2 class="ui-state-default"><span>Slide Two</span></h2>
+            <div>
+                <div>
+                    <img alt="image" src="jordan.jpg"/>
+                </div>
+            </div>
+            </li>
+            <li>
+            <h2 class="ui-state-default"><span>Slide Three</span></h2>
+            <div>
+                <div>
+                    <img alt="image" src="kobe.jpg"/>
+                </div>
+            </div>
+            </li>
+            <li>
+            <h2 class="ui-state-default"><span>Slide Four</span></h2>
+            <div>
+                <div>
+                    <img width="768" alt="image" src="flower.jpg"/>
+                </div>
+              </div>
+            </li>
+            <li>
+              <h2 class="ui-state-default"><span>Slide Five</span></h2>
+            <div>
+                <div>
+                    <img alt="image" src="wushu.jpg"/>                    
+                </div>
+            </div>
+            </li>
+        </ol>
+    </div>
+
+    <div class="toggler">
+  	<div id="effect" class="ui-widget-content ui-corner-all">
+    <h3 class="ui-widget-header ui-corner-all">Hipster</h3>
+    <p>
+      Marfa messenger bag master cleanse, literally meggings Williamsburg irony plaid gastropub +1. American Apparel PBR&B Thundercats, yr Intelligentsia 
+    </p>
+  </div>
+</div>
+ 
+<select name="effects" id="effectTypes">
+  <option value="blind">Blind</option>
+  <option value="bounce">Bounce</option>
+  <option value="clip">Clip</option>
+  <option value="drop">Drop</option>
+  <option value="explode">Explode</option>
+  <option value="fade">Fade</option>
+  <option value="fold">Fold</option>
+  <option value="highlight">Highlight</option>
+  <option value="puff">Puff</option>
+  <option value="pulsate">Pulsate</option>
+  <option value="scale">Scale</option>
+  <option value="shake">Shake</option>
+  <option value="size">Size</option>
+  <option value="slide">Slide</option>
+  <option value="transfer">Transfer</option>
+</select>
+ 
+<a href="#" id="button" class="ui-state-default ui-corner-all"  style = "margin-bottom: 50px;">Hide Me</a>
+
+<div class="toggler2">
+  <div id="effect2" class="ui-widget-content ui-corner-all">
+    <h3 class="ui-widget-header ui-corner-all">Show</h3>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet augue eget dolor malesuada porta a sit amet dolor. 
+  </div>
+</div>
+ 
+<select name="effects" id="effectTypes">
+  <option value="blind">Blind</option>
+  <option value="bounce">Bounce</option>
+  <option value="clip">Clip</option>
+  <option value="drop">Drop</option>
+  <option value="explode">Explode</option>
+  <option value="fold">Fold</option>
+  <option value="highlight">Highlight</option>
+  <option value="puff">Puff</option>
+  <option value="pulsate">Pulsate</option>
+  <option value="scale">Scale</option>
+  <option value="shake">Shake</option>
+  <option value="size">Size</option>
+  <option value="slide">Slide</option>
+</select>
+ 
+<a href="#" id="button2" class="ui-state-default ui-corner-all">Show Me</a>
+    <div id = "drag">
+    <ol>
+        <li>Milk</li>
+        <li>Eggs</li>
+        <li>Cereal</li>
+    </ol>
+</div>  
+<div id = "drag2">
+    <ul>
+      <li>apples</li>
+      <li>pears</li>
+      <li>oranges</li>
+    </ul>
+</div>
+<div id = "drop" class = "border">
+    <p>Shopping Cart</p>
+</div>
+
+
+ 
+</body>
+</html>
